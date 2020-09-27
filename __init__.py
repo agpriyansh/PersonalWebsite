@@ -182,5 +182,3 @@ def logout():
     else:
         return redirect('/home')
 
-if __name__ == '__main__':
-    website.run(debug=True)
