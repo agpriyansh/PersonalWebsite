@@ -12,11 +12,11 @@ website.config.update(
 )
 mail = Mail(website)
 website.secret_key = 'eb3e92e0439bd515e3a8a7c74bb72c0f'
-website.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://agpriyansh:drockx@localhost/Website'
+website.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://ubuntu:7H15_u53r_15_4_7h3_W3B5173_d474@localhost/website'
 database = SQLAlchemy(website)
 login_info = {
     'user':'agpriyansh',
-    'passwd':'agpriyansh'
+    'passwd':'pripri@@1301'
 }
 
 class Blog(database.Model):
