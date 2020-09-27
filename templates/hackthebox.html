@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+<!-- TITLE START -->
+{% block title %}
+Priyansh Agrawal : Hack The Box
+{% endblock %}
+<!-- TITLE END -->
+
+<!-- SIDEBAR START -->
+{% block sidebar %}
+<li><a href="/hackthebox">Hack The Box</a></li>
+{% endblock %}
+<!-- SIDEBAR END -->
+
+<!-- MAIN START -->
+{% block main %}
+<!-- HTB START -->
+<section class="section my-work" data-section="hackthebox">
+  <div class="container">
+    <div class="section-heading">
+      <h2><a href="/hackthebox">Hack The Box</a></h2>
+      <div class="line-dec"></div>
+    </div>
+    <div class="row">
+      <div class="isotope-wrapper">
+        <div class="isotope-box">
+          {% for item in htb %}
+          {% set image = 'assets/images/hackthebox/' + item.image %}
+          <!-- POST START -->
+          <div class="isotope-item" data-type="nature">
+            <figure class="snip1321">
+              <img
+                src="{{url_for('static', filename=image)}}"
+                alt="{{item.name}}"
+              />
+              <figcaption>
+                <a href="/hackthebox/{{item.slug}}">
+                  <h4>{{item.name}}</h4>
+                  <span>{{item.category}}</span>
+                </a>
+              </figcaption>
+            </figure>
+          </div>
+          <!-- POST END -->
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- HTB END -->
+{% endblock %}
+<!-- MAIN END -->

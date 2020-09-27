@@ -1,0 +1,237 @@
+{% extends 'base.html' %}
+
+<!-- TITLE START -->
+{% block title %}
+Priyansh Agrawal : Admin Dashboard
+{% endblock %}
+<!-- TITLE END -->
+
+<!-- LOGOUT BUTTON START -->
+{% block button %}
+<button class="btn btn-primary"><a href="/logout">Logout</a></button>
+{% endblock %}
+<!-- LOGOUT BUTTON END -->
+
+<!-- SIDEBAR START -->
+{% block sidebar %}
+<li><a href="#hackthebox">Hack The Box</a></li>
+<li><a href="#blog">Blog</a></li>
+<li><a href="#add-htb">Add Hack The Box</a></li>
+<li><a href="#add-blog">Add Blog</a></li>
+{% endblock %}
+<!-- SIDEBAR END -->
+
+<!-- MAIN START -->
+{% block main %}
+<!-- HTB START -->
+<section class="section about-me" data-section="hackthebox">
+    <div class="container">
+      <div class="section-heading">
+        <h2>Hack The Box</h2>
+        <div class="line-dec"></div>
+      </div>
+      <!-- TABLE START -->
+      <table class="table table-striped table-dark">
+        <thead>
+          <tr>
+            <th scope="col">id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Category</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for item in htb %}
+          <tr>
+            <th scope="row">{{ item.id }}</th>
+            <td>{{ item.name }}</td>
+            <td>{{ item.category }}</td>
+            <td><button class="btn btn-primary"><a href="/delete-hackthebox/{{ item.id }}"> Delete </a></button></td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+      <!-- TABLE END -->
+    </div>
+</section>
+<!-- HTB END -->
+<!-- BLOG START -->
+<section class="section about-me" data-section="blog">
+    <div class="container">
+      <div class="section-heading">
+        <h2>Blog</h2>
+        <div class="line-dec"></div>
+      </div>
+      <!-- TABLE START -->
+      <table class="table table-striped table-dark">
+        <thead>
+          <tr>
+            <th scope="col">id</th>
+            <th scope="col">Name</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for item in blog %}
+          <tr>
+            <th scope="row">{{ item.id }}</th>
+            <td>{{ item.name }}</td>
+            <td><button class="btn btn-primary"><a href="/delete-blog/{{ item.id }}"> Delete </a></button></td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+      <!-- TABLE END -->
+    </div>
+</section>
+<!-- BLOG END -->
+<!-- ADD HTB START -->
+<section class="section about-me" data-section="add-htb">
+    <div class="container">
+      <div class="section-heading">
+        <h2>Add Hack The Box</h2>
+        <div class="line-dec"></div>
+      </div>
+      <form id="contact" action="/add-hackthebox" method="POST">
+        <div class="row">
+          <div class="col-md-6">
+            <fieldset>
+              <input
+                name="name"
+                type="text"
+                class="form-control"
+                id="name"
+                placeholder="Name of the box"
+                required=""
+              />
+            </fieldset>
+          </div>
+          <div class="col-md-6">
+            <fieldset>
+              <input
+                name="category"
+                type="text"
+                class="form-control"
+                id="category"
+                placeholder="Category"
+                required=""
+              />
+            </fieldset>
+          </div>
+          <div class="col-md-6">
+            <fieldset>
+              <input
+                name="slug"
+                type="text"
+                class="form-control"
+                id="slug"
+                placeholder="Slug"
+                required=""
+              />
+            </fieldset>
+          </div>
+          <div class="col-md-6">
+            <fieldset>
+              <input
+                name="image"
+                type="text"
+                class="form-control" 
+                id="image"
+                placeholder="Image File"
+                required=""
+              />
+            </fieldset>
+          </div>
+          <div class="col-md-12">
+            <fieldset>
+              <input
+                name="html"
+                type="text"
+                class="form-control" 
+                id="html"
+                placeholder="HTML File"
+                required=""
+              />
+            </fieldset>
+          </div>
+          <div class="col-md-12">
+            <fieldset>
+              <button type="submit" id="form-submit" class="button">
+                Add
+              </button>
+            </fieldset>
+          </div>
+        </div>
+      </form>
+    </div>
+</section>
+<!-- ADD HTB END -->
+<!-- ADD Blog START -->
+<section class="section about-me" data-section="add-blog">
+  <div class="container">
+    <div class="section-heading">
+      <h2>Add Blog</h2>
+      <div class="line-dec"></div>
+    </div>
+    <form id="contact" action="/add-blog" method="POST">
+      <div class="row">
+        <div class="col-md-6">
+          <fieldset>
+            <input
+              name="name"
+              type="text"
+              class="form-control"
+              id="name"
+              placeholder="Name of the blog"
+              required=""
+            />
+          </fieldset>
+        </div>
+        <div class="col-md-6">
+          <fieldset>
+            <input
+              name="slug"
+              type="text"
+              class="form-control"
+              id="slug"
+              placeholder="Slug"
+              required=""
+            />
+          </fieldset>
+        </div>
+        <div class="col-md-12">
+          <fieldset>
+            <input
+              name="desc"
+              type="text"
+              class="form-control"
+              id="desc"
+              placeholder="Description"
+              required=""
+            />
+          </fieldset>
+        </div>
+        <div class="col-md-12">
+          <fieldset>
+            <input
+              name="html"
+              type="text"
+              class="form-control" 
+              id="html"
+              placeholder="HTML File"
+              required=""
+            />
+          </fieldset>
+        </div>
+        <div class="col-md-12">
+          <fieldset>
+            <button type="submit" id="form-submit" class="button">
+              Add
+            </button>
+          </fieldset>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>
+<!-- ADD Blog END -->
+{% endblock %}
+<!-- MAIN END -->

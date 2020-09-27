@@ -1,0 +1,205 @@
+{% extends 'base.html' %}
+
+<!-- TITLE START -->
+{% block title %}
+Priyansh Agrawal
+{% endblock %}
+<!-- TITLE END -->
+
+<!-- SIDEBAR START -->
+{% block sidebar %}
+<li><a href="#about">About</a></li>
+<li><a href="#hackthebox">Hack The Box</a></li>
+<li><a href="#blog">Blog</a></li>
+<li><a href="#contact">Contact</a></li>
+{% endblock %}
+<!-- SIDEBAR END -->
+
+<!-- MAIN START -->
+{% block main %}
+<!-- ABOUT START -->
+<section class="section about-me" data-section="about">
+    <div class="container">
+      <div class="section-heading">
+        <h2>About Me</h2>
+        <div class="line-dec"></div>
+      </div>
+      <!-- POST START -->
+      <div class="left-image-post">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="left-image">
+              <img src="{{ url_for('static', filename='assets/images/left-image.jpg') }}" alt="" />
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="right-text">
+              <h4>Reflux HTML CSS Template</h4>
+              <p>
+                I'm Priyansh Agrawal currently pursuing Computer Science Engineering with Specialization in Cyber Security and Forensics, from UPES Dehraun.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- POST END -->
+      <!-- POST START -->
+      <div class="right-image-post">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="left-text">
+              <h4>Sed sagittis rhoncus velit</h4>
+              <p>
+                Text
+              </p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="right-image">
+              <img src="{{ url_for('static', filename='assets/images/right-image.jpg') }}" alt="" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- POST END -->
+    </div>
+</section>
+<!-- ABOUT ME END -->
+<!-- HTB START -->
+<section class="section my-work" data-section="hackthebox">
+  <div class="container">
+    <div class="section-heading">
+      <h2><a href="/hackthebox">Hack The Box</a></h2>
+      <div class="line-dec"></div>
+    </div>
+    <div class="row">
+      <div class="isotope-wrapper">
+        <div class="isotope-box">
+          {% for item in htb %}
+          {% set image = 'assets/images/hackthebox/' + item.image %}
+          <!-- POST START -->
+          <div class="isotope-item" data-type="nature">
+            <figure class="snip1321">
+              <img
+                src="{{url_for('static', filename=image)}}"
+                alt="{{item.name}}"
+              />
+              <figcaption>
+                <a href="/hackthebox/{{item.slug}}">
+                  <h4>{{item.name}}</h4>
+                  <span>{{item.category}}</span>
+                </a>
+              </figcaption>
+            </figure>
+          </div>
+          <!-- POST END -->
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- HTB END -->
+<!-- BLOG START -->
+<section class="section my-services" data-section="blog">
+  <div class="container">
+    <div class="section-heading">
+      <h2><a href="/blog">Blog</a></h2>
+      <div class="line-dec"></div>
+    </div>
+    <div class="row">
+      {% for item in blog %}
+      <!-- POST START -->
+        <div class="col-md-6">
+          <div class="service-item">
+            <a href="/blog/{{item.slug}}">
+              <h4>{{item.name}}</h4>
+            </a>
+            <p>
+              {{item.desc}}
+            </p>
+          </div>
+        </div>
+      <!-- POST END -->
+      {% endfor %}
+    </div>
+  </div>
+</section>
+<!-- BLOG END -->
+<!-- CONTACT START -->
+<section class="section contact-me" data-section="contact">
+  <div class="container">
+    <div class="section-heading">
+      <h2>Contact</h2>
+      <div class="line-dec"></div>
+    </div>
+    <div class="row">
+      <div class="right-content">
+        <div class="container">
+          <form id="contact" action="/contact" method="POST">
+            <div class="row">
+              <div class="col-md-6">
+                <fieldset>
+                  <input
+                    name="name"
+                    type="text"
+                    class="form-control"
+                    id="name"
+                    placeholder="Your name..."
+                    required=""
+                  />
+                </fieldset>
+              </div>
+              <div class="col-md-6">
+                <fieldset>
+                  <input
+                    name="email"
+                    type="text"
+                    class="form-control"
+                    id="email"
+                    placeholder="Your email..."
+                    required=""
+                  />
+                </fieldset>
+              </div>
+              <div class="col-md-12">
+                <fieldset>
+                  <input
+                    name="subject"
+                    type="text"
+                    class="form-control"
+                    id="subject"
+                    placeholder="Subject..."
+                    required=""
+                  />
+                </fieldset>
+              </div>
+              <div class="col-md-12">
+                <fieldset>
+                  <textarea
+                    name="message"
+                    rows="6"
+                    class="form-control"
+                    id="message"
+                    placeholder="Your message...(Max 255 chars)"
+                    required=""
+                  ></textarea>
+                </fieldset>
+              </div>
+              <div class="col-md-12">
+                <fieldset>
+                  <button type="submit" id="form-submit" class="button">
+                    Send Message
+                  </button>
+                </fieldset>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- CONTACT END -->
+{% endblock %}
+<!-- MAIN END -->

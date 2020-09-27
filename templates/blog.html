@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+<!-- TITLE START -->
+{% block title %}
+Priyansh Agrawal : Blog
+{% endblock %}
+<!-- TITLE END -->
+
+<!-- SIDEBAR START -->
+{% block sidebar %}
+<li><a href="/blog">Blog</a></li>
+{% endblock %}
+<!-- SIDEBAR END -->
+
+<!-- MAIN START -->
+{% block main %}
+<!-- BLOG START -->
+<section class="section my-services" data-section="blog">
+  <div class="container">
+    <div class="section-heading">
+      <h2><a href="/blog">Blog</a></h2>
+      <div class="line-dec"></div>
+    </div>
+    <div class="row">
+      {% for item in blog %}
+      <!-- POST START -->
+        <div class="col-md-6">
+          <div class="service-item">
+            <a href="/blog/{{item.slug}}">
+              <h4>{{item.name}}</h4>
+            </a>
+            <p>
+              {{item.desc}}
+            </p>
+          </div>
+        </div>
+      <!-- POST END -->
+      {% endfor %}
+    </div>
+  </div>
+</section>
+<!-- BLOG END -->
+{% endblock %}
+<!-- MAIN END -->

@@ -1,0 +1,14 @@
+@import url(fontawesome.css);
+@import url("https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900");
+body {
+    font-family: 'Lato', sans-serif;
+}
+
+#page-wraper {
+    background: url(../images/page-bg.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    width: 100%;
+}

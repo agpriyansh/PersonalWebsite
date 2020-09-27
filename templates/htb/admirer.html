@@ -1,0 +1,576 @@
+{% extends 'base.html' %}
+
+<!-- TITLE START -->
+{% block title %}
+Priyansh Agrawal : Hack The Box : Admirer
+{% endblock %}
+<!-- TITLE END -->
+
+<!-- SIDEBAR START -->
+{% block sidebar %}
+<li><a href="">Admirer Writeup</a></li>
+{% endblock %}
+<!-- SIDEBAR END -->
+
+<!-- MAIN START -->
+{% block main %}
+<!-- ABOUT START -->
+<section class="section about-me">
+    <div class="container">
+      <div class="section-heading">
+        <h2>Admirer</h2>
+        <div class="line-dec"></div>
+      </div>
+      <!-- POST START -->
+      <div class="left-image-post">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="left-image">
+              <img src="{{ url_for('static', filename='assets/images/hackthebox/Admirer/admirer.png') }}" alt="" />
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="right-text">
+              <h4>About The Box</h4>
+              <p>
+                  This is a writeup of Admirer which is an easy rated linux box on Hack The Box. It was created by polarbearer & GibParadox.
+                  Requirements for this are : 
+              </p>
+                <ol>
+                  <li>Basic Web Fuzzing</li>
+                  <li>SQL</li>
+                  <li>Basic Understanding of Python and Linux</li>
+                </ol>
+                <p>
+                    It is a great box for begginers to start with. 
+                </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- POST END -->
+    </div>
+</section>
+<!-- ABOUT END -->
+<!-- WRITEUP START -->
+<section class="section about-me">
+    <div class="container">
+      <div class="section-heading">
+        <h2>Writeup</h2>
+        <div class="line-dec"></div>
+      </div>
+      <!-- NMAP START -->
+      <div class="left-image-post">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="left-image">
+            <a
+                href="{{ url_for('static', filename='assets/images/hackthebox/Admirer/nmap-initial.png') }}"
+                data-lightbox="image-1"
+                data-title="Caption">
+                <img src="{{ url_for('static', filename='assets/images/hackthebox/Admirer/nmap-initial.png') }}" alt="">
+            </a>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="right-text">
+              <h4>Nmap</h4>
+              <p>
+                  We start the recon by doing a nmap scan : <br>
+                  From the result (click the image to enlarge it) we see that there are 3 ports open : 
+              </p>
+              <ol>
+                  <li>21 : ftp</li>
+                  <li>22 : ssh</li>
+                  <li>80 : http</li>
+              </ol>
+              <p>
+                  Also from the scan result we can see that anonymous login on ftp is disabled.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- NMAP END -->
+      <!-- WEBSITE START -->
+      <div class="right-image-post">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="right-image">
+            <a
+                href="{{ url_for('static', filename='assets/images/hackthebox/Admirer/website.png') }}"
+                data-lightbox="image-1"
+                data-title="Caption">
+                <img src="{{ url_for('static', filename='assets/images/hackthebox/Admirer/website.png') }}" alt="">
+            </a>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="left-text">
+              <h4>Website</h4>
+              <p>
+                This is a normal website (click on the image to enlarge it) with some pictures on it. Also the source code does not reveal anything.
+                So we directly jump into dir and file fuzzing. 
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- WEBSITE END -->
+      <!-- WFUZZ START -->
+      <div class="right-image-post">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="right-image">
+            <a
+                href="{{ url_for('static', filename='assets/images/hackthebox/Admirer/wfuzz-first.png') }}"
+                data-lightbox="image-1"
+                data-title="Caption">
+                <img src="{{ url_for('static', filename='assets/images/hackthebox/Admirer/wfuzz-first.png') }}" alt="">
+            </a>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="left-text">
+              <h4>WFUZZ</h4>
+              <p>
+                The first scan we do is with common.txt and we get the following result.(click the image to zoom in) <br>
+                Here we get some static folders of a website and we get "robots.txt". So lets take a look at robots.txt
+              </p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="left-text">
+                <br><br>
+              <p>
+                In robots.txt we see a disallowed entry /admin-dir and it is given that this dir contains contacts and credentials. But if we go to this dir, 
+                it gives us 403 so we try a wfuzz scan on this dir with txt as extention, in hope that we will find some interesting files. Also this reveals a user named waldo. 
+              </p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="right-image">
+            <a
+                href="{{ url_for('static', filename='assets/images/hackthebox/Admirer/robots.txt.png') }}"
+                data-lightbox="image-1"
+                data-title="Caption">
+                <img src="{{ url_for('static', filename='assets/images/hackthebox/Admirer/robots.txt.png') }}" alt="">
+            </a>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="right-image">
+            <a
+                href="{{ url_for('static', filename='assets/images/hackthebox/Admirer/wfuzz-second.png') }}"
+                data-lightbox="image-1"
+                data-title="Caption">
+                <img src="{{ url_for('static', filename='assets/images/hackthebox/Admirer/wfuzz-second.png') }}" alt="">
+            </a>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="left-text">
+                <br><br>
+              <p>
+                  So, we found two files :
+              </p>
+              <ol>
+                <li>contact.txt</li>
+                <li>credentials.txt</li>
+              </ol>
+              <p>
+                Lets take a look at them. 
+              </p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="right-image">
+            <a
+                href="{{ url_for('static', filename='assets/images/hackthebox/Admirer/contact.txt.png') }}"
+                data-lightbox="image-1"
+                data-title="Caption">
+                <img src="{{ url_for('static', filename='assets/images/hackthebox/Admirer/contact.txt.png') }}" alt="">
+            </a>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="left-text">
+                <br><br>
+              <p>
+                  Looking at these files, in contact.txt (left) we see some emails and in credentials.txt (left) we have some creds. So lets try to log in ftp uing these creds. 
+              </p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="right-image">
+            <a
+                href="{{ url_for('static', filename='assets/images/hackthebox/Admirer/credentials.txt.png') }}"
+                data-lightbox="image-1"
+                data-title="Caption">
+                <img src="{{ url_for('static', filename='assets/images/hackthebox/Admirer/credentials.txt.png') }}" alt="">
+            </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- WFUZZ END -->
+      <!-- FTP START -->
+      <div class="right-image-post">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="right-image">
+            <a
+                href="{{ url_for('static', filename='assets/images/hackthebox/Admirer/ftp.png') }}"
+                data-lightbox="image-1"
+                data-title="Caption">
+                <img src="{{ url_for('static', filename='assets/images/hackthebox/Admirer/ftp.png') }}" alt="">
+            </a>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="left-text">
+              <h4>FTP</h4>
+              <p>
+                In the ftp dir we again get 2 files :
+              </p>
+              <ol>
+                <li>dump.sql</li>
+                <li>html.tar.gz</li>
+              </ol>
+              <p>
+                Lets take a closer look at both the files. 
+              </p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="left-text">
+              <br><br><br><br>
+              <p>
+                The data in dump.sql is just the images and text which is beign displayed on the website, though we can see the database name and the mysql version from the file. 
+              </p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="right-image">
+            <a
+                href="{{ url_for('static', filename='assets/images/hackthebox/Admirer/dump.sql.png') }}"
+                data-lightbox="image-1"
+                data-title="Caption">
+                <img src="{{ url_for('static', filename='assets/images/hackthebox/Admirer/dump.sql.png') }}" alt="">
+            </a>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="right-image">
+            <a
+                href="{{ url_for('static', filename='assets/images/hackthebox/Admirer/html-zip.png') }}"
+                data-lightbox="image-1"
+                data-title="Caption">
+                <img src="{{ url_for('static', filename='assets/images/hackthebox/Admirer/html-zip.png') }}" alt="">
+            </a>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="left-text">
+              <br>
+              <p>
+                We have a few files and folders here and it looks like these are the files of the root dir of the web-server. So we see another dir named "utility-scripts" which has some php files :
+              </p>
+              <ol>
+                <li>admin_tasks.php</li>
+                <li>db_admin.php</li>
+                <li>info.php</li>
+                <li>phptest.php</li>
+              </ol>              
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="left-text">
+              <br><br><br><br>
+              <p>
+                The source code of the file "db_admin.php" reveals the username and passowrd of the sql server on the box.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="right-image">
+            <a
+                href="{{ url_for('static', filename='assets/images/hackthebox/Admirer/db_admin.php.png') }}"
+                data-lightbox="image-1"
+                data-title="Caption">
+                <img src="{{ url_for('static', filename='assets/images/hackthebox/Admirer/db_admin.php.png') }}" alt="">
+            </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- FTP END -->
+      <!-- UTILITY-SCRIPTS START -->
+      <div class="right-image-post">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="right-image">
+            <a
+                href="{{ url_for('static', filename='assets/images/hackthebox/Admirer/admin_tasks.png') }}"
+                data-lightbox="image-1"
+                data-title="Caption">
+                <img src="{{ url_for('static', filename='assets/images/hackthebox/Admirer/admin_tasks.png') }}" alt="">
+            </a>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="left-text">
+              <h4>UTILITY-SCRIPTS</h4>
+              <p>
+                If we open utility-scripts in the browser we will get a 403, but if we open a particular script it will give us a 200, which means we have the permissions for scripts but not the folder. 
+                So again lets run a wfuzz scan on this dir for php files and lets see if we get something. 
+              </p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="left-text">
+              <br><br><br>
+              <p>
+                From the wfuzz scan we found one other php file "adminer.php" present in utility-scripts. When we open it in browser we get 'Adminer' login page(Adminer is a tool for managing content in SQL databsese). We also see that the Adminer version being used is 4.6.2. 
+                So lets look if we have any cve's for Adminer 4.6.2.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="right-image">
+            <a
+                href="{{ url_for('static', filename='assets/images/hackthebox/Admirer/wfuzz-three.png') }}"
+                data-lightbox="image-1"
+                data-title="Caption">
+                <img src="{{ url_for('static', filename='assets/images/hackthebox/Admirer/wfuzz-three.png') }}" alt="">
+            </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- UTILITY-SCRIPTS END -->
+      <!-- ADMINER START -->
+      <div class="right-image-post">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="right-image">
+            <a
+                href="{{ url_for('static', filename='assets/images/hackthebox/Admirer/adminer.png') }}"
+                data-lightbox="image-1"
+                data-title="Caption">
+                <img src="{{ url_for('static', filename='assets/images/hackthebox/Admirer/adminer.png') }}" alt="">
+            </a>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="left-text">
+              <h4>Adminer</h4>
+              <p>
+                After some research we find a file disclosure vulnerability of adminer 4.6.2. <br>Refer this <a href="https://www.foregenix.com/blog/serious-vulnerability-discovered-in-adminer-tool">link</a>.
+                <br>It tells us that from the adminer login page, we can connect to our remote database instead of connecting to the victims database. And then execute a query which can read the local files in the system.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- ADMINER END -->
+      <!-- FOOTHOLD START -->
+      <div class="right-image-post">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="right-image">
+            <a
+                href="{{ url_for('static', filename='assets/images/hackthebox/Admirer/sql-conf.png') }}"
+                data-lightbox="image-1"
+                data-title="Caption">
+                <img src="{{ url_for('static', filename='assets/images/hackthebox/Admirer/sql-conf.png') }}" alt="">
+            </a>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="left-text">
+              <h4>FootHold</h4>
+              <p>
+                For this we first need to configure our local mysql server to listen on 0.0.0.0 instead of localhost. You can do this by editing "/etc/my.cnf.d/server.cnf", just uncomment the "bind-address" line and set it equal to "0.0.0.0". And then restart the mysql service.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="left-text">
+              <br><br>
+              <p>
+                Next we need to create a database on our local sql server and then create a table in the databse. I have also created a new user for this expoit but it is up to you, you can use your existing user as well.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="right-image">
+            <a
+                href="{{ url_for('static', filename='assets/images/hackthebox/Admirer/database.png') }}"
+                data-lightbox="image-1"
+                data-title="Caption">
+                <img src="{{ url_for('static', filename='assets/images/hackthebox/Admirer/database.png') }}" alt="">
+            </a>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="right-image">
+            <a
+                href="{{ url_for('static', filename='assets/images/hackthebox/Admirer/adminer-login.png') }}"
+                data-lightbox="image-1"
+                data-title="Caption">
+                <img src="{{ url_for('static', filename='assets/images/hackthebox/Admirer/adminer-login.png') }}" alt="">
+            </a>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="left-text">
+              <br><br>
+              <p>
+                Now we will login to the adminer login page using aur databse creds...
+                <br>As seen from the image given we have succesfully logged in to adminer. Now we can read local files by executing these commands. 
+              </p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="left-text">
+              <p>
+                By running this command we can read local files. Just replace the file-name, database-name and table-name according to your sql conf. I will be reading the index.php file.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="right-image">
+            <a
+                href="{{ url_for('static', filename='assets/images/hackthebox/Admirer/command.png') }}"
+                data-lightbox="image-1"
+                data-title="Caption">
+                <img src="{{ url_for('static', filename='assets/images/hackthebox/Admirer/command.png') }}" alt="">
+            </a>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="right-image">
+            <a
+                href="{{ url_for('static', filename='assets/images/hackthebox/Admirer/exploit-s.png') }}"
+                data-lightbox="image-1"
+                data-title="Caption">
+                <img src="{{ url_for('static', filename='assets/images/hackthebox/Admirer/exploit-s.png') }}" alt="">
+            </a>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="left-text">
+              <br><br><br>
+              <p>
+                After the command has been succesfully executed we will get the contents of index.php in our table. Looking closely, we notice that in index.php we have the creds for the sql server on the victim machine. Now we login to adminer using these creds but we didn't get anything interesting. 
+              </p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="left-text">
+              <br><br><br>
+              <p>
+                As we didn't get anything in the victim database. Lets try to login to the user via ssh. <br>
+                On supplying  the cred we succesfully login as user waldo into the box. Which is the only user in the box so we can take the user flag as well. 
+              </p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="right-image">
+            <a
+                href="{{ url_for('static', filename='assets/images/hackthebox/Admirer/ssh-s.png') }}"
+                data-lightbox="image-1"
+                data-title="Caption">
+                <img src="{{ url_for('static', filename='assets/images/hackthebox/Admirer/ssh-s.png') }}" alt="">
+            </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- FOOTHOLD END -->
+      <!-- PRIV-ESC START -->
+      <div class="right-image-post">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="right-image">
+            <a
+                href="{{ url_for('static', filename='assets/images/hackthebox/Admirer/sudo-l.png') }}"
+                data-lightbox="image-1"
+                data-title="Caption">
+                <img src="{{ url_for('static', filename='assets/images/hackthebox/Admirer/sudo-l.png') }}" alt="">
+            </a>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="left-text">
+              <h4>PRIVESC</h4>
+              <p>
+                Now for privesc lets check if we can run sudo on this box, we chech that by "sudo -l", in the given output we can see that we have SETENV permission on the file "/opt/scripts/admin_tasks.sh". Which means we can change the environment variables for this file. Lets take a look at "/opt/scripts/admin_tasks.sh"
+              </p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="left-text">
+              <br><br><br>
+              <p>
+                The admin_tasks.sh is being used to backup some data and it can be run as root. There is one more python script which is being executed if we choose to backup web data. 
+                
+              </p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="right-image">
+            <a
+                href="{{ url_for('static', filename='assets/images/hackthebox/Admirer/python-file.png') }}"
+                data-lightbox="image-1"
+                data-title="Caption">
+                <img src="{{ url_for('static', filename='assets/images/hackthebox/Admirer/python-file.png') }}" alt="">
+            </a>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="right-image">
+            <a
+                href="{{ url_for('static', filename='assets/images/hackthebox/Admirer/root.png') }}"
+                data-lightbox="image-1"
+                data-title="Caption">
+                <img src="{{ url_for('static', filename='assets/images/hackthebox/Admirer/root.png') }}" alt="">
+            </a>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="left-text">
+              <br><br>
+              <p>
+                When we run admin_tasks.sh as root, backup.py will also run as root. As seen from the backup.py code it is using a function make_archive() from shutil library. 
+                Here we can tric this python script to import our shutil.py which will have a function make_archive() with a payload.                 
+              </p>
+              <ol>
+                <li>First we will make our shutil.py</li>
+                <li>Then we will change the import path of python and run admin_tasks.sh as root.</li>
+                <li>Then choose to backup web data.</li>
+              </ol>
+              <p>
+                By doing this our payload should execute as root. 
+              </p>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="right-image">
+            <a
+                href="{{ url_for('static', filename='assets/images/hackthebox/Admirer/final.png') }}"
+                data-lightbox="image-1"
+                data-title="Caption">
+                <img src="{{ url_for('static', filename='assets/images/hackthebox/Admirer/final.png') }}" alt="">
+            </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- PRIV-ESC END -->
+    </div>
+</section>
+<!-- WRITEUP END -->
+{% endblock %}
+<!-- MAIN END -->

@@ -1,0 +1,193 @@
+
+      <!-- ABOUT START -->
+      <section class="section about-me" data-section="about">
+        <div class="container">
+          <div class="section-heading">
+            <h2>About Me</h2>
+            <div class="line-dec"></div>
+          </div>
+          <div class="left-image-post">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="left-image">
+                  <img src="{{ url_for('static', filename='assets/images/left-image.jpg') }}" alt="" />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="right-text">
+                  <h4>Reflux HTML CSS Template</h4>
+                  <p>
+                    Text
+                  </p>
+                  <div class="white-button">
+                    <a href="#">Read More</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="right-image-post">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="left-text">
+                  <h4>Sed sagittis rhoncus velit</h4>
+                  <p>
+                    Text
+                  </p>
+                  <div class="white-button">
+                    <a href="#">Read More</a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="right-image">
+                  <img src="{{ url_for('static', filename='assets/images/right-image.jpg') }}" alt="" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- ABOUT ME END -->
+
+      <!-- BLOG START -->
+      <section class="section my-services" data-section="blog">
+        <div class="container">
+          <div class="section-heading">
+            <h2>Blog</h2>
+            <div class="line-dec"></div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="service-item">
+                <div class="first-service-icon service-icon"></div>
+                <h4>HTML5 &amp; CSS3</h4>
+                <p>
+                  Phasellus non convallis dolor. Integer tempor hendrerit arcu
+                  at bibendum. Sed ac ante non metus vehicula congue quis eget
+                  eros.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- BLOG END -->
+
+      <!-- HTB START -->
+      <section class="section my-work" data-section="htb">
+        <div class="container">
+          <div class="section-heading">
+            <h2>Hack The Box</h2>
+            <div class="line-dec"></div>
+          </div>
+          <div class="row">
+            <div class="isotope-wrapper">
+              <div class="isotope-box">
+
+                <div class="isotope-item" data-type="nature">
+                  <figure class="snip1321">
+                    <img
+                      src="{{ url_for('static', filename='assets/images/portfolio-01.jpg') }}"
+                      alt="sq-sample26"
+                    />
+                    <figcaption>
+                      <a
+                        href="{{ url_for('static', filename='assets/images/portfolio-01.jpg') }}"
+                        data-lightbox="image-1"
+                        data-title="Caption"
+                        ><i class="fa fa-long-arrow-right"></i
+                      ></a>
+                      <h4>First Title</h4>
+                      <span>free to use our template</span>
+                    </figcaption>
+                  </figure>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- HTB END -->
+
+      <!-- CONTACT START -->
+      <section class="section contact-me" data-section="contact">
+        <div class="container">
+          <div class="section-heading">
+            <h2>Contact Me</h2>
+            <div class="line-dec"></div>
+            <span
+              >Fusce eget nibh nec justo interdum condimentum. Morbi justo ex,
+              efficitur at ante ac, tincidunt maximus ligula. Lorem ipsum dolor
+              sit amet, consectetur adipiscing elit.</span
+            >
+          </div>
+          <div class="row">
+            <div class="right-content">
+              <div class="container">
+                <form id="contact" action="" method="post">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <fieldset>
+                        <input
+                          name="name"
+                          type="text"
+                          class="form-control"
+                          id="name"
+                          placeholder="Your name..."
+                          required=""
+                        />
+                      </fieldset>
+                    </div>
+                    <div class="col-md-6">
+                      <fieldset>
+                        <input
+                          name="email"
+                          type="text"
+                          class="form-control"
+                          id="email"
+                          placeholder="Your email..."
+                          required=""
+                        />
+                      </fieldset>
+                    </div>
+                    <div class="col-md-12">
+                      <fieldset>
+                        <input
+                          name="subject"
+                          type="text"
+                          class="form-control"
+                          id="subject"
+                          placeholder="Subject..."
+                          required=""
+                        />
+                      </fieldset>
+                    </div>
+                    <div class="col-md-12">
+                      <fieldset>
+                        <textarea
+                          name="message"
+                          rows="6"
+                          class="form-control"
+                          id="message"
+                          placeholder="Your message..."
+                          required=""
+                        ></textarea>
+                      </fieldset>
+                    </div>
+                    <div class="col-md-12">
+                      <fieldset>
+                        <button type="submit" id="form-submit" class="button">
+                          Send Message
+                        </button>
+                      </fieldset>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- CONTACT END -->
