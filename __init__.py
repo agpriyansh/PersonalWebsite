@@ -7,16 +7,16 @@ website.config.update(
     MAIL_SERVER = 'smtp.gmail.com',
     MAIL_PORT = '465',
     MAIL_USE_SSL = True,
-    MAIL_USERNAME = 'priyanshagrawal385@gmail.com',
-    MAIL_PASSWORD = 'i_fckn_love_htb'
+    MAIL_USERNAME = # gmail address here,
+    MAIL_PASSWORD = #gmail password here
 )
 mail = Mail(website)
-website.secret_key = 'eb3e92e0439bd515e3a8a7c74bb72c0f'
-website.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://ubuntu:7H15_u53r_15_4_7h3_W3B5173_d474@localhost/website'
+website.secret_key = #enter a secret key here
+website.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://<mysql username>:<mysql password>@localhost/<database name>'
 database = SQLAlchemy(website)
 login_info = {
-    'user':'agpriyansh',
-    'passwd':'pripri@@1301'
+    'user': #admin username here,
+    'passwd': #admin password here
 }
 
 class Blog(database.Model):
@@ -154,7 +154,7 @@ def agpriyansh():
             session['logged_in'] = user
             mail.send_message('WEBSITE ALERT !!!!',
                             sender='Website Priyansh',
-                            recipients=['priyanshagrawal224@gmail.com','priyanshagrawal@live.in'],
+                            recipients=[<email recipients here>],
                             body='DID YOU JUST LOG IN TO YOUR WEBSITE ???\nIF YES, IGNORE THIS EMAIL.\nIF YOU DIDN\'T, YOU KNOW WHAT TO DO :|'
                             )
             return redirect('/dashboard')
